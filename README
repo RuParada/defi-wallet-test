@@ -1,0 +1,32 @@
+1. Start a local or web server along with inex.html at the root
+2. Install and configure defi wallet and metamask with cronos testnet (chainID is the 338)
+3. To protest the metamask for sending a transaction, in the browser console, enter:
+    await connectMetamask();
+    contract_diamond.buy("0x38fD65cf2594e9aC445c18c516b703c25a4a672f", 1, "Here is your wallet you connected to", gas = undefined, 10); 
+
+4. An error occurs when testing the defi wallet to send a transaction. To test the defi wallet, in the browser console, enter:
+
+    await connectCronos();
+    contract_diamond.buy("0x38fD65cf2594e9aC445c18c516b703c25a4a672f", 1, "Here is your wallet you connected to", gas = undefined, 10); 
+
+
+At the first test, a successful transaction through the defi wallet is possible, but all subsequent ones issue:
+
+ext.js:439 Uncaught (in promise) 
+{request: {…}, response: null, type: 'TypeError'}
+request
+: 
+{url: 'https://cronos-testnet-3.crypto.org:8545', options: {…}, originUrl: 'https://cronos-testnet-3.crypto.org:8545'}
+response
+: 
+null
+type
+: 
+"TypeError"
+[[Prototype]]
+: 
+Object
+executeTransaction  @   ext.js:439
+await in executeTransaction (async)     
+buy @   ext.js:463
+(anonymous)

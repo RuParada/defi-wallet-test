@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | LoadedLions</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.2.11/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/deficonnect/dist/index.umd.js"></script>
+    <!-- <script src="./lib/deficonnect.js"></script> -->
+</head>
+
+<body>
+
+    <div id="opacity" style="display: none"></div>
+    <div id="popup" style="display: none">
+        <h2 style="text-align : center;font-family: 'Quicksand', sans-serif;">Choose your wallet</h2>
+        <div class="btn-container">
+
+            <button class="btn container__wallet" onclick="connectCronos(callback=null)">
+                <div class="logo">
+                    <!-- <img src="./TemplateData/defi-wallet-logo.webp" alt="Crypto.com DeFi Wallet"> -->
+                </div>
+                <div class="details__defi">
+                    <h4>DeFi Wallet</h4>
+                </div>
+            </button>
+
+            <button class="container__wallet btn" onclick="">
+                <div class="logo">
+                    <!-- <img src="./TemplateData/metamask-logo.webp" alt="MetaMask"> -->
+                </div>
+                <div class="details__MetaMask">
+                    <h4>MetaMask</h4>
+                </div>
+            </button>
+
+        </div>
+    </div>
+
+
+
+    <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas" width=1920 height=1080></canvas>
+        <div id="unity-loading-bar">
+            <div id="unity-logo"></div>
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+        <div id="unity-warning"> </div>
+        <div id="unity-footer">
+            <div id="unity-webgl-logo"></div>
+            <div display="flex" id="disconnect" style="display: none">
+                <button onclick="" type="button" aria-haspopup="menu" aria-expanded="false" data-state="closed"
+                    class="but_wallet">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="metamask-wallet-icon"
+                        style="display: none">
+                        <g fill-rule="evenodd">
+                            <path d="M6.813 21.05l3.12.829v-1.086l.255-.254h1.785v2.168h-1.91l-2.356-1.02zm0 0"
+                                fill="#cdbdb2"></path>
+                            <path d="M17.004 21.05l-3.059.829v-1.086l-.254-.254h-1.785v2.168h1.914l2.356-1.02zm0 0"
+                                fill="#cdbdb2">
+                            </path>
+                            <path
+                                d="M10.188 18.695l-.254 2.098.32-.254h3.309l.382.254-.254-2.098-.511-.32-2.547.063zm0 0"
+                                fill="#393939">
+                            </path>
+                            <path d="M8.469 4.492L9.996 8.06l.703 10.379h2.48l.766-10.38 1.403-3.566zm0 0"
+                                fill="#f89c35"></path>
+                            <path d="M1.781 12.324L0 17.484l4.457-.254h2.867V15l-.129-4.586-.636.512zm0 0"
+                                fill="#f89d35"></path>
+                            <path d="M5.156 12.898l5.223.13-.574 2.671-2.48-.636zm0 0" fill="#d87c30"></path>
+                            <path d="M5.156 12.96L7.324 15v2.04zm0 0" fill="#ea8d3a"></path>
+                            <path d="M7.324 15.063l2.547.636.828 2.739-.574.32-2.8-1.656zm0 0" fill="#f89d35"></path>
+                            <path d="M7.324 17.102l-.511 3.949 3.375-2.356zm0 0" fill="#eb8f35"></path>
+                            <path d="M10.379 13.027l.32 5.41-.957-2.769zm0 0" fill="#ea8e3a"></path>
+                            <path d="M4.395 17.164l2.93-.062-.513 3.949zm0 0" fill="#d87c30"></path>
+                            <path d="M1.402 22.77l5.41-1.72-2.417-3.886-4.395.32zm0 0" fill="#eb8f35"></path>
+                            <path d="M9.996 8.059l-2.738 2.293-2.102 2.546 5.223.192zm0 0" fill="#e8821e"></path>
+                            <path
+                                d="M6.813 21.05l3.375-2.355-.254 2.035v1.149l-2.293-.45zm0 0M17.004 21.05l-3.313-2.355.254 2.035v1.149l2.293-.45zm0 0"
+                                fill="#dfcec3"></path>
+                            <path d="M8.98 14.172l.7 1.465L7.195 15zm0 0" fill="#393939"></path>
+                            <path d="M1.336 1.5l8.66 6.559-1.465-3.567zm0 0" fill="#e88f35"></path>
+                            <path
+                                d="M1.336 1.5L.19 5.004l.637 3.82-.445.254.637.574-.512.446.703.636-.445.383 1.015 1.274 4.778-1.465c2.336-1.871 3.48-2.824 3.437-2.867-.039-.043-2.93-2.227-8.66-6.559zm0 0"
+                                fill="#8e5a30"></path>
+                            <path d="M22.031 12.324l1.785 5.16-4.457-.254h-2.867V15l.13-4.586.636.512zm0 0"
+                                fill="#f89d35"></path>
+                            <path d="M18.656 12.898l-5.218.13.57 2.671 2.484-.636zm0 0" fill="#d87c30"></path>
+                            <path d="M18.656 12.96L16.492 15v2.04zm0 0" fill="#ea8d3a"></path>
+                            <path d="M16.492 15.063l-2.547.636-.828 2.739.574.32 2.801-1.656zm0 0" fill="#f89d35">
+                            </path>
+                            <path d="M16.492 17.102l.512 3.949-3.313-2.293zm0 0" fill="#eb8f35"></path>
+                            <path d="M13.438 13.027l-.32 5.41.956-2.769zm0 0" fill="#ea8e3a"></path>
+                            <path d="M19.422 17.164l-2.93-.062.512 3.949zm0 0" fill="#d87c30"></path>
+                            <path d="M22.414 22.77l-5.41-1.72 2.418-3.886 4.394.32zm0 0" fill="#eb8f35"></path>
+                            <path d="M13.82 8.059l2.735 2.293 2.101 2.546-5.218.192zm0 0" fill="#e8821e"></path>
+                            <path d="M14.836 14.172l-.7 1.465L16.622 15zm0 0" fill="#393939"></path>
+                            <path d="M22.48 1.5l-8.66 6.559 1.461-3.567zm0 0" fill="#e88f35"></path>
+                            <path
+                                d="M22.48 1.5l1.145 3.504-.637 3.82.446.254-.637.574.508.446-.7.636.446.383-1.02 1.274-4.773-1.465c-2.336-1.871-3.48-2.824-3.438-2.867.04-.043 2.926-2.227 8.66-6.559zm0 0"
+                                fill="#8e5a30"></path>
+                        </g>
+                    </svg>
+                    <!-- <img src="./TemplateData/defi-wallet-logo.webp" id="defi-wallet-icon" style="display: none">
+                    change wallet -->
+                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="sc-245e4276-0 sc-69a3d192-4 cKQQUY bKlwGx">
+                        <g clip-path="url(#log-out_svg__clip0_2736_43309)" stroke="currentColor" stroke-width="2"
+                            stroke-miterlimit="10">
+                            <path d="M4.667 8h10"></path>
+                            <path d="M11.333 11.333L14.667 8l-3.334-3.333M9.333.667h-8v14.666h8"
+                                stroke-linecap="square"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="log-out_svg__clip0_2736_43309">
+                                <path fill="#fff" transform="matrix(-1 0 0 1 16 0)" d="M0 0h16v16H0z"></path>
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                </button>
+            </div>
+            <div id="unity-build">
+
+                <div id="unity-build-title">LoadedLions</div>
+                <div id="unity-fullscreen-button"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="ext.js"></script>
+</body>
+</html>
